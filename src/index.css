@@ -77,3 +77,52 @@
     @apply bg-background text-foreground;
   }
 }
+
+body {
+  --sb-track-color: #0e0e0e;
+  --sb-thumb-color: #181818;
+  --sb-size: 5px;
+  background-color: #0E0E0E;
+}
+
+body::-webkit-scrollbar {
+  width: var(--sb-size);
+}
+
+body::-webkit-scrollbar-track {
+  background: var(--sb-track-color);
+  border-radius: 1px;
+}
+
+body::-webkit-scrollbar-thumb {
+  background: var(--sb-thumb-color);
+  border-radius: 1px;
+  border: 8px solid #181818;
+}
+
+@supports not selector(::-webkit-scrollbar) {
+  body {
+    scrollbar-color: var(--sb-thumb-color) var(--sb-track-color);
+  }
+}
+
+/* Custom scrollbar styles for Ace Editor */
+.ace_editor.ace-monokai .ace_scrollbar::-webkit-scrollbar {
+  width: 12px;
+  height: 12px;
+}
+
+.ace_editor.ace-monokai .ace_scrollbar::-webkit-scrollbar-track {
+  background: #0E0E0E; /* Same as editor background */
+}
+
+.ace_editor.ace-monokai .ace_scrollbar::-webkit-scrollbar-thumb {
+  background-color: #737373; /* Dark gray for scrollbar thumb */
+  border-radius: 10px;
+  border: 3px solid #0E0E0E; /* Same as editor background, adds padding */
+}
+
+.ace_editor.ace-monokai .ace_scrollbar {
+  scrollbar-width: thin;
+  scrollbar-color: #737373 #0E0E0E;
+}

@@ -1,4 +1,5 @@
-import Json from "./Json";
+import { useEffect, useState } from "react";
+import Json from "./Json/Json";
 import { Button } from "./ui/button";
 import { Input } from "./ui/input";
 import {
@@ -8,11 +9,20 @@ import {
   SelectTrigger,
   SelectValue,
 } from "./ui/select";
+import axios from "axios";
 const Body = () => {
+  const [url, setUrl] = useState("");
+  const [data, setData] = useState(null);
+  const handleRequest = async () => {
+    console.log(url);
+    const response = await axios.get(url);
+    setData(response.data);
+  };
+
   return (
     <div className="h-screen w-full bg-primaryBackground flex justify-center text-primaryText">
-      <div className="w-[93%] bg-primaryBackground border-l-[0.01px] border-[#1F1F1F] ">
-        <div className="flex w-full h-20 p-4 gap-2">
+      <div className="w-[93%] bg-primaryBackground border-l-[0.01px] border-[#1F1F1F]  ">
+        <div className="flex w-full   gap-2 m-4">
           <Select defaultValue="get">
             <SelectTrigger className="w-32 font-Inter font-semibold font-sm  ">
               <SelectValue placeholder="Theme" />
@@ -67,12 +77,19 @@ const Body = () => {
             type="text"
             className="bg-[#181818] placeholder:text-[#49494A]"
             placeholder="Enter a URL or a cURL command"
+            value={url}
+            onChange={(e) => {
+              setUrl(e.target.value);
+            }}
           />
-          <Button className="w-28 text-white bg-purple-700 hover:bg-purple-800 font-Inter">
+          <Button
+            className="w-28 text-white bg-purple-700 hover:bg-purple-800 font-Inter"
+            onClick={handleRequest}
+          >
             Send
           </Button>
         </div>
-        {/* <Json/> */}
+        <Json jsonData={data} />
       </div>
     </div>
   );
