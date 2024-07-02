@@ -1,9 +1,10 @@
 import { useState } from "react";
-import Json from "./Json/Json";
+import Json from "./JsonDisplayer/Json";
 import { Button } from "./ui/button";
 import { Input } from "./ui/input";
 import axios from "axios";
 import SelectMethod from "./SelectMethod/SelectMethod";
+import Main from "./ParamsHeaders/Main";
 
 // Define the type for the response data
 interface ResponseData {
@@ -59,6 +60,7 @@ const Body = () => {
             Send
           </Button>
         </div>
+        <Main/>
         <Json jsonData={data} statusCode={statusCode} timeTaken={timeTaken} dataSize={dataSize} />
       </div>
     </div>
