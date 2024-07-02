@@ -20,6 +20,7 @@ const Json = ({ jsonData }: JsonProps) => {
       </div>
       <AceEditor
       style={{backgroundColor:"#0E0E0E"}}
+      className='font-Inter font-semibold'
       showGutter={true}
       highlightActiveLine={false}
         mode="json"
