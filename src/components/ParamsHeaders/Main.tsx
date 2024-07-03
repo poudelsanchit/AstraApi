@@ -1,12 +1,21 @@
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "../ui/tabs";
+import Body from "./Body";
+import Params from "./Params";
 
-const Main = () => {
+interface MainProps {
+  params: { parameter: string; value: string }[];
+  setParams: (data: { parameter: string; value: string }[]) => void;
+}
+
+const Main = ({ params, setParams }: MainProps) => {
   const data = [
     {
       name: "Parameters",
+      component: <Params data={params} setData={setParams} />,
     },
     {
       name: "Body",
+      component: <Body />,
     },
     {
       name: "Headers",
@@ -22,17 +31,17 @@ const Main = () => {
     },
   ];
   return (
-    <div className="py-2  text-white font-Inter text-sm border-b-[0.1px] border-border">
-      <Tabs defaultValue="Parameters" className="w-full ">
-        <TabsList className="border-b-[0.1px] border-border px-2 w-full">
+    <div className="py-2 text-white font-Inter text-lg border-b-[0.1px] border-border ">
+      <Tabs defaultValue="Parameters" className="w-full">
+        <TabsList className="border-b-[0.1px] border-border px-2 w-full overflow-x-auto overflow-y-hidden sm:overflow-hidden">
           {data.map(({ name }) => {
             return <TabsTrigger value={name}>{name}</TabsTrigger>;
           })}
         </TabsList>
-        {data.map(({ name }) => {
+        {data.map(({ name, component }) => {
           return (
-            <TabsContent value={name} className="px-4">
-              <div className="h-32"> {name}</div>
+            <TabsContent value={name} className="pl-4">
+              {component}
             </TabsContent>
           );
         })}

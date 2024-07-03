@@ -85,19 +85,19 @@ body {
   background-color: #0E0E0E;
 }
 
-body::-webkit-scrollbar {
+::-webkit-scrollbar {
   width: var(--sb-size);
 }
 
-body::-webkit-scrollbar-track {
+::-webkit-scrollbar-track {
   background: var(--sb-track-color);
   border-radius: 1px;
 }
 
-body::-webkit-scrollbar-thumb {
+::-webkit-scrollbar-thumb {
   background: var(--sb-thumb-color);
   border-radius: 1px;
-  border: 8px solid #181818;
+  border: 8px solid #292727;
 }
 
 @supports not selector(::-webkit-scrollbar) {

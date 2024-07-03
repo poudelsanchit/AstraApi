@@ -16,7 +16,13 @@ const Json = ({ jsonData, statusCode, timeTaken, dataSize }: JsonProps) => {
 
   return (
     <div className="flex flex-col font-Inter text-white">
-      <Status statusCode={statusCode} timeTaken={timeTaken} dataSize={dataSize} />
+      {statusCode ? (
+        <Status
+          statusCode={statusCode}
+          timeTaken={timeTaken}
+          dataSize={dataSize}
+        />
+      ) : null}
       <div className="text-sm font-semibold border-b-[0.01px] border-[#1F1F1F] py-2 px-4">
         JSON
       </div>
