@@ -1,4 +1,3 @@
-import { useState } from "react";
 import {
   Select,
   SelectContent,
@@ -7,7 +6,12 @@ import {
   SelectValue,
 } from "../ui/select";
 
-const SelectMethod = () => {
+interface SelectMethodProps {
+  method: string;
+  onMethodChange: (method: string) => void;
+}
+
+const SelectMethod: React.FC<SelectMethodProps> = ({ method, onMethodChange }) => {
   const methods = [
     {
       method: "get",
@@ -39,16 +43,12 @@ const SelectMethod = () => {
     },
   ];
 
-  const [selectedMethod, setSelectedMethod] = useState("get");
-  const selectedColor = methods.find(method => method.method === selectedMethod)?.color;
+  const selectedColor = methods.find((m) => m.method === method)?.color;
 
   return (
-    <Select
-      defaultValue="get"
-      onValueChange={(value) => setSelectedMethod(value)}
-    >
+    <Select defaultValue="get" onValueChange={onMethodChange}>
       <SelectTrigger className={`w-32 font-Inter font-semibold font-sm ${selectedColor}`}>
-        <SelectValue placeholder="Theme" />
+        <SelectValue placeholder="Select Method" />
       </SelectTrigger>
       <SelectContent>
         {methods.map((data) => (

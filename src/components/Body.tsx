@@ -2,23 +2,20 @@ import { useState } from "react";
 import Json from "./JsonDisplayer/Json";
 import { Button } from "./ui/button";
 import { Input } from "./ui/input";
-import axios from "axios";
+import axios, { AxiosRequestConfig } from "axios";
 import SelectMethod from "./SelectMethod/SelectMethod";
 import Main from "./ParamsHeaders/Main";
 import { useToast } from "./ui/use-toast";
 
-// Define the type for the response data
 interface ResponseData {
-  [key: string]: any; // Adjust this based on the actual structure of your response data
+  [key: string]: any;
 }
 
-// Define the type for the query parameters
 interface ParamData {
   parameter: string;
   value: string;
 }
 
-// Define the type for the state
 interface State {
   url: string;
   data: ResponseData;
@@ -26,6 +23,7 @@ interface State {
   timeTaken: number | null;
   dataSize: number | null;
   params: ParamData[];
+  method: string;
 }
 
 const Body = () => {
@@ -38,6 +36,7 @@ const Body = () => {
     timeTaken: null,
     dataSize: null,
     params: [{ parameter: "", value: "" }],
+    method: "get",
   });
 
   const handleRequest = async () => {
@@ -49,12 +48,11 @@ const Body = () => {
         duration: 5000,
         isClosable: true,
       });
-      return; // Return early if URL is not provided
+      return;
     }
 
     const startTime = performance.now();
 
-    // Construct the query string from params
     const queryString = state.params
       .filter((param) => param.parameter && param.value)
       .map(
@@ -64,11 +62,18 @@ const Body = () => {
           )}`
       )
       .join("&");
+
     const fullUrl = queryString ? `${state.url}?${queryString}` : state.url;
 
     try {
-      const response = await axios.get(fullUrl);
-      console.log(response)
+      const config: AxiosRequestConfig = {
+        url: fullUrl,
+        method: state.method as any,
+        data: state.method === 'post' || state.method === 'put' ? { /* your data here */ } : undefined,
+      };
+
+      const response = await axios(config);
+
       const endTime = performance.now();
       const responseSize = new TextEncoder().encode(
         JSON.stringify(response.data)
@@ -89,7 +94,6 @@ const Body = () => {
         duration: 5000,
         isClosable: true,
       });
-
     } catch (error: any) {
       console.error("Error fetching data:", error);
 
@@ -124,7 +128,12 @@ const Body = () => {
     <div className="h-screen w-full bg-primaryBackground flex sm:justify-end text-primaryText">
       <div className="w-[95%] mr-8 bg-primaryBackground border-l-[0.01px] border-[#1F1F1F]">
         <div className="flex w-full gap-2 p-2">
-          <SelectMethod />
+          <SelectMethod
+            method={state.method}
+            onMethodChange={(method) =>
+              setState((prevState) => ({ ...prevState, method }))
+            }
+          />
           <Input
             type="text"
             className="bg-[#181818] text-white font-Inter text-sm placeholder:text-[#49494A]"
