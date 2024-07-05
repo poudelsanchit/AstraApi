@@ -48,10 +48,7 @@ const Body = () => {
     }));
     toast({
       title: `Method switched to ${method}`,
-      status: "success",
       duration: 1000,
-      isClosable: true,
-      position: "bottom-left",
     });
   };
 
@@ -60,9 +57,7 @@ const Body = () => {
       toast({
         title: "Invalid URL",
         description: "Please enter a valid URL to perform API tests.",
-        status: "error",
         duration: 5000,
-        isClosable: true,
       });
       return;
     }
@@ -111,9 +106,7 @@ const Body = () => {
       toast({
         title: "Request Successful",
         description: `API responded with status code ${response.status}`,
-        status: "success",
         duration: 5000,
-        isClosable: true,
       });
     } catch (error: any) {
       console.error("Error fetching data:", error);
@@ -138,9 +131,7 @@ const Body = () => {
       toast({
         title: "Request Failed",
         description: errorMessage,
-        status: "error",
         duration: 5000,
-        isClosable: true,
       });
     }
   };
