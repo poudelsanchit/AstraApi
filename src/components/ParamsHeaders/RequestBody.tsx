@@ -1,9 +1,7 @@
-import React from "react";
 import "ace-builds/src-noconflict/mode-json";
 import "ace-builds/src-noconflict/theme-monokai";
 import "../JsonDisplayer/ace-custom.css"; // Import your custom CSS
 import AceEditor from "react-ace";
-import { Input } from "../ui/input";
 
 interface RequestBodyProps {
   json: any; // JSON data as a string
