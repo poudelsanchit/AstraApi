@@ -1,6 +1,7 @@
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "../ui/tabs";
 import RequestBody from "./RequestBody";
 import Params from "./Params";
+import Headers from "./Headers";
 
 interface MainProps {
   json:any
@@ -21,6 +22,8 @@ const Main = ({json,setRequestBody ,params, setParams }: MainProps) => {
     },
     {
       name: "Headers",
+      component: <Headers/>,
+
     },
     {
       name: "Authorization",
