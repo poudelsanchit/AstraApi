@@ -126,3 +126,11 @@ body {
   scrollbar-width: thin;
   scrollbar-color: #737373 #0E0E0E;
 }
+
+
+/* ace-custom.css */
+.ace_editor {
+  /* Ensure no extra spaces or padding are added */
+  padding: 0;
+  margin: 0;
+}

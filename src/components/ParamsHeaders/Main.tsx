@@ -1,13 +1,15 @@
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "../ui/tabs";
-import Body from "./Body";
+import RequestBody from "./RequestBody";
 import Params from "./Params";
 
 interface MainProps {
+  json:any
+  setRequestBody:any
   params: { parameter: string; value: string }[];
   setParams: (data: { parameter: string; value: string }[]) => void;
 }
 
-const Main = ({ params, setParams }: MainProps) => {
+const Main = ({json,setRequestBody ,params, setParams }: MainProps) => {
   const data = [
     {
       name: "Parameters",
@@ -15,7 +17,7 @@ const Main = ({ params, setParams }: MainProps) => {
     },
     {
       name: "Body",
-      component: <Body />,
+      component: <RequestBody json={json} setRequestBody={setRequestBody}/>,
     },
     {
       name: "Headers",

@@ -24,6 +24,7 @@ interface State {
   dataSize: number | null;
   params: ParamData[];
   method: string;
+  jsonBody: string;
 }
 
 const Body = () => {
@@ -37,8 +38,10 @@ const Body = () => {
     dataSize: null,
     params: [{ parameter: "", value: "" }],
     method: "get",
+    jsonBody: "",
   });
   const handleMethodSwitch = (method: string) => {
+    console.log(state.jsonBody)
     setState((prev) => ({
       ...prev,
       method,
@@ -48,6 +51,7 @@ const Body = () => {
       status: "success",
       duration: 1000,
       isClosable: true,
+      position: "bottom-left",
     });
   };
 
@@ -78,19 +82,19 @@ const Body = () => {
     const fullUrl = queryString ? `${state.url}?${queryString}` : state.url;
 
     try {
-      const config: AxiosRequestConfig = {
-        url: fullUrl,
-        method: state.method as any,
-        data:
-          state.method === "post" || state.method === "put"
-            ? {
-                /* your data here */
-              }
-            : undefined,
-      };
+      const requestData = state.method === "post" || state.method === "put"
+      ? JSON.parse(state.jsonBody)
+      : undefined;
+      console.log(requestData)
+
+    const config: AxiosRequestConfig = {
+      url: fullUrl,
+      method: state.method as any,
+      data: requestData,
+    };
 
       const response = await axios(config);
-
+      // console.log(response)
       const endTime = performance.now();
       const responseSize = new TextEncoder().encode(
         JSON.stringify(response.data)
@@ -166,6 +170,10 @@ const Body = () => {
           </Button>
         </div>
         <Main
+          json={state.jsonBody}
+          setRequestBody={(body: any) =>
+            setState((prev) => ({ ...prev, jsonBody: body }))
+          }
           params={state.params}
           setParams={(params) =>
             setState((prevState) => ({ ...prevState, params }))
