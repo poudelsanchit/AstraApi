@@ -38,6 +38,18 @@ const Body = () => {
     params: [{ parameter: "", value: "" }],
     method: "get",
   });
+  const handleMethodSwitch = (method: string) => {
+    setState((prev) => ({
+      ...prev,
+      method,
+    }));
+    toast({
+      title: `Method switched to ${method}`,
+      status: "success",
+      duration: 1000,
+      isClosable: true,
+    });
+  };
 
   const handleRequest = async () => {
     if (!state.url) {
@@ -69,7 +81,12 @@ const Body = () => {
       const config: AxiosRequestConfig = {
         url: fullUrl,
         method: state.method as any,
-        data: state.method === 'post' || state.method === 'put' ? { /* your data here */ } : undefined,
+        data:
+          state.method === "post" || state.method === "put"
+            ? {
+                /* your data here */
+              }
+            : undefined,
       };
 
       const response = await axios(config);
@@ -130,9 +147,7 @@ const Body = () => {
         <div className="flex w-full gap-2 p-2">
           <SelectMethod
             method={state.method}
-            onMethodChange={(method) =>
-              setState((prevState) => ({ ...prevState, method }))
-            }
+            onMethodChange={handleMethodSwitch}
           />
           <Input
             type="text"
