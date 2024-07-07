@@ -1,8 +1,8 @@
 
-const Authorization = () => {
+const Header = () => {
   return (
     <div className="h-40 text-sm">Coming soon!!</div>
   )
 }
 
-export default Authorization
+export default Header

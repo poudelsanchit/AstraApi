@@ -1,16 +1,19 @@
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "../ui/tabs";
-import RequestBody from "./RequestBody";
 import Params from "./Params";
-import Headers from "./Headers";
+import RequestBody2 from "./RequestBody2";
+import Authorization from "./Authorization";
+import PreRequest from "./PreRequest";
+import Tests from "./Tests";
+import Header from "./Header";
 
 interface MainProps {
-  json:any
-  setRequestBody:any
+  json: any;
+  setRequestBody: any;
   params: { parameter: string; value: string }[];
   setParams: (data: { parameter: string; value: string }[]) => void;
 }
 
-const Main = ({json,setRequestBody ,params, setParams }: MainProps) => {
+const Main = ({ json, setRequestBody, params, setParams }: MainProps) => {
   const data = [
     {
       name: "Parameters",
@@ -18,21 +21,28 @@ const Main = ({json,setRequestBody ,params, setParams }: MainProps) => {
     },
     {
       name: "Body",
-      component: <RequestBody json={json} setRequestBody={setRequestBody}/>,
+      component: <RequestBody2 json={json} setRequestBody={setRequestBody} />,
     },
     {
       name: "Headers",
-      component: <Headers/>,
+      component: <Header />,
 
     },
     {
       name: "Authorization",
+      component: <Authorization />,
+
+
     },
     {
       name: "Pre-request Script",
+      component: <PreRequest />,
+
     },
     {
       name: "Tests",
+      component: <Tests />,
+
     },
   ];
   return (

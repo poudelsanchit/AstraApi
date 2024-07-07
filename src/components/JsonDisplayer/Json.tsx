@@ -37,10 +37,10 @@ const Json = ({ jsonData, statusCode, timeTaken, dataSize }: JsonProps) => {
         theme="monokai"
         value={jsonString}
         fontSize={13}
-        readOnly={true}
+        readOnly={false}
         name="json-editor"
         editorProps={{ $blockScrolling: true }}
-        height="30rem"
+        height="20rem"
         wrapEnabled={true}
         width="100%"
       />

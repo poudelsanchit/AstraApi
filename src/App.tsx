@@ -1,17 +1,13 @@
-import Body from "./components/Body"
-import { Toaster } from "./components/ui/toaster"
-
+import { Toaster } from "./components/ui/toaster";
+import Routes from "./Routes";
 
 function App() {
-
   return (
     <>
-    {/* <NavBar/> */}
-    <Body/>
-    <Toaster />
-
-      </>
-  )
+      <Routes />
+      <Toaster />
+    </>
+  );
 }
 
-export default App
+export default App;

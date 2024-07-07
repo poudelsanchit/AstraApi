@@ -10,7 +10,7 @@ interface JsonProps {
 const JsonSection = ({jsonData,statusCode,timeTaken,dataSize}:JsonProps) => {
   return (
     <div>
-      <Tabs defaultValue="Parameters" className="w-full">
+      <Tabs defaultValue="Json" className="w-full h-full ">
         <TabsList className="border-b-[0.1px] border-border px-2 w-full overflow-x-auto overflow-y-hidden sm:overflow-hidden">
           <TabsTrigger value="Json">Json</TabsTrigger>
           <TabsTrigger value="Headers">Headers</TabsTrigger>
@@ -21,7 +21,7 @@ const JsonSection = ({jsonData,statusCode,timeTaken,dataSize}:JsonProps) => {
         </TabsContent>
 
         <TabsContent value={"Headers"} className="pl-4">
-          Headers
+          Coming soon
         </TabsContent>
       </Tabs>
     </div>
