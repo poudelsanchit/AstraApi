@@ -53,7 +53,7 @@ const Params = ({ data, setData }: ParamsProps) => {
         <div key={index} className="flex gap-2 border-[0.1px] p-1">
           <Input
             type="text"
-            className="bg-[#181818] h-8 text-white font-Inter text-xs font-semibold tracking-wide placeholder:text-[#49494A]"
+            className="bg-primaryBackground h-8 text-white font-Inter text-xs font-semibold tracking-wide placeholder:text-[#49494A]"
             placeholder="Parameter"
             value={item.parameter}
             onChange={(e) =>
@@ -62,7 +62,7 @@ const Params = ({ data, setData }: ParamsProps) => {
           />
           <Input
             type="text"
-            className="bg-[#181818] h-8 text-white font-Inter text-sm placeholder:text-[#49494A]"
+            className="bg-primaryBackground h-8 text-white font-Inter text-sm placeholder:text-[#49494A] border-l-2"
             placeholder="Value"
             value={item.value}
             onChange={(e) => handleInputChange(index, "value", e.target.value)}

@@ -18,11 +18,11 @@ module.exports = {
     },
     extend: {
       fontFamily: {
-        Inter: ["Inter", "sans-serif"],
+        Inter: ["Quicksand", "sans-serif"],
         Quicksand: ["Quicksand", "sans-serif"],
       },
       colors: {
-        primaryBackground: "#0E0E0E",
+        primaryBackground: "#0F0F0F",
         primaryText:"#BCBCBC",
         secondaryText:"#737373",
         border: "#161616",

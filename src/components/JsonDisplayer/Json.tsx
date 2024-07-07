@@ -23,9 +23,7 @@ const Json = ({ jsonData, statusCode, timeTaken, dataSize }: JsonProps) => {
           dataSize={dataSize}
         />
       ) : null}
-      <div className="text-sm font-semibold border-b-[0.01px] border-[#1F1F1F] py-2 px-4">
-        JSON
-      </div>
+    
       <div className="text-xs text-[#737373] font-semibold border-b-[0.01px] border-[#1F1F1F] p-2 cursor-pointer py-2 px-4">
         Response Body
       </div>

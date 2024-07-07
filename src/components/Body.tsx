@@ -6,6 +6,9 @@ import axios, { AxiosRequestConfig } from "axios";
 import SelectMethod from "./SelectMethod/SelectMethod";
 import Main from "./ParamsHeaders/Main";
 import { useToast } from "./ui/use-toast";
+import { IoSettingsOutline } from "react-icons/io5";
+import NavBar from "./NavBar";
+import JsonSection from "./JsonDisplayer/JsonSection";
 
 interface ResponseData {
   [key: string]: any;
@@ -41,7 +44,7 @@ const Body = () => {
     jsonBody: "",
   });
   const handleMethodSwitch = (method: string) => {
-    console.log(state.jsonBody)
+    console.log(state.jsonBody);
     setState((prev) => ({
       ...prev,
       method,
@@ -77,16 +80,17 @@ const Body = () => {
     const fullUrl = queryString ? `${state.url}?${queryString}` : state.url;
 
     try {
-      const requestData = state.method === "post" || state.method === "put"
-      ? JSON.parse(state.jsonBody)
-      : undefined;
-      console.log(requestData)
+      const requestData =
+        state.method === "post" || state.method === "put"
+          ? JSON.parse(state.jsonBody)
+          : undefined;
+      console.log(requestData);
 
-    const config: AxiosRequestConfig = {
-      url: fullUrl,
-      method: state.method as any,
-      data: requestData,
-    };
+      const config: AxiosRequestConfig = {
+        url: fullUrl,
+        method: state.method as any,
+        data: requestData,
+      };
 
       const response = await axios(config);
       // console.log(response)
@@ -137,45 +141,55 @@ const Body = () => {
   };
 
   return (
-    <div className="h-screen w-full bg-primaryBackground flex sm:justify-end text-primaryText">
-      <div className="w-[95%] mr-8 bg-primaryBackground border-l-[0.01px] border-[#1F1F1F]">
-        <div className="flex w-full gap-2 p-2">
-          <SelectMethod
-            method={state.method}
-            onMethodChange={handleMethodSwitch}
-          />
-          <Input
-            type="text"
-            className="bg-[#181818] text-white font-Inter text-sm placeholder:text-[#49494A]"
-            placeholder="Enter a URL or paste a cURL command to perform API tests"
-            value={state.url}
-            onChange={(e) =>
-              setState((prevState) => ({ ...prevState, url: e.target.value }))
+    <div className="flex flex-col h-screen w-full">
+      <NavBar />
+      <div className=" h-full  bg-primaryBackground flex sm:justify- text-primaryText">
+        <div className="w-[3.5%] h-full pb-4 bg-red-40 flex justify-center items-end">
+          <IoSettingsOutline className=" text-lg cursor-pointer text-secondaryText hover:text-white" />
+        </div>
+        <div className="w-[94%] bg-primaryBackground border-l-[0.01px] border-border">
+          <div className="flex w-full gap-1 p-2">
+            <SelectMethod
+              method={state.method}
+              onMethodChange={handleMethodSwitch}
+            />
+            <Input
+              type="text"
+              className="bg-[#171717] text-white font-Inter text-sm placeholder:text-[#49494A]"
+              placeholder="Enter a URL or paste a cURL command to perform API tests"
+              value={state.url}
+              onChange={(e) =>
+                setState((prevState) => ({ ...prevState, url: e.target.value }))
+              }
+            />
+            <Button
+              className="w-28  text-white bg-purple-700 hover:bg-purple-800 font-Inter"
+              onClick={handleRequest}
+            >
+              Send
+            </Button>
+          </div>
+          <Main
+            json={state.jsonBody}
+            setRequestBody={(body: any) =>
+              setState((prev) => ({ ...prev, jsonBody: body }))
+            }
+            params={state.params}
+            setParams={(params) =>
+              setState((prevState) => ({ ...prevState, params }))
             }
           />
-          <Button
-            className="w-28 text-white bg-purple-700 hover:bg-purple-800 font-Inter"
-            onClick={handleRequest}
-          >
-            Send
-          </Button>
+          <JsonSection  jsonData={state.data}
+            statusCode={state.statusCode}
+            timeTaken={state.timeTaken}
+            dataSize={state.dataSize}/>
+          {/* <Json
+            jsonData={state.data}
+            statusCode={state.statusCode}
+            timeTaken={state.timeTaken}
+            dataSize={state.dataSize}
+          /> */}
         </div>
-        <Main
-          json={state.jsonBody}
-          setRequestBody={(body: any) =>
-            setState((prev) => ({ ...prev, jsonBody: body }))
-          }
-          params={state.params}
-          setParams={(params) =>
-            setState((prevState) => ({ ...prevState, params }))
-          }
-        />
-        <Json
-          jsonData={state.data}
-          statusCode={state.statusCode}
-          timeTaken={state.timeTaken}
-          dataSize={state.dataSize}
-        />
       </div>
     </div>
   );
